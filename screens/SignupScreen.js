@@ -9,18 +9,15 @@ import {
   Image,
   Alert,
 } from "react-native";
+import SignupHeader from "../components/SignupHeader";
 
-export default class LoginScreen extends Component {
+export default class SignupScreen extends Component {
   constructor(props) {
     super(props);
     state = {
       email: "",
       password: "",
     };
-    this.ChangeScreen = this.ChangeScreen.bind(this);
-  }
-  ChangeScreen(e) {
-    this.props.navigation.navigate(e);
   }
 
   onClickListener = (viewId) => {
@@ -30,6 +27,27 @@ export default class LoginScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <SignupHeader />
+        <Image
+          style={styles.logo}
+          source={{ uri: "https://png.icons8.com/google/color/120" }}
+        />
+
+        <View style={styles.inputContainer}>
+          <Image
+            style={styles.inputIcon}
+            source={{
+              uri: "https://png.icons8.com/user/ultraviolet/50/3498db",
+            }}
+          />
+          <TextInput
+            style={styles.inputs}
+            placeholder="Name"
+            underlineColorAndroid="transparent"
+            onChangeText={(email) => this.setState({ email })}
+          />
+        </View>
+
         <View style={styles.inputContainer}>
           <Image
             style={styles.inputIcon}
@@ -40,9 +58,8 @@ export default class LoginScreen extends Component {
           <TextInput
             style={styles.inputs}
             placeholder="Email"
-            keyboardType="email-address"
             underlineColorAndroid="transparent"
-            onChangeText={(email) => this.setState({ email })}
+            onChangeText={(password) => this.setState({ password })}
           />
         </View>
 
@@ -50,52 +67,42 @@ export default class LoginScreen extends Component {
           <Image
             style={styles.inputIcon}
             source={{
-              uri: "https://png.icons8.com/key-2/ultraviolet/50/3498db",
+              uri: "https://png.icons8.com/speech-bubble/ultraviolet/50",
             }}
           />
           <TextInput
-            style={styles.inputs}
-            placeholder="Password"
-            secureTextEntry={true}
+            style={[styles.messageInput]}
+            placeholder="Message"
             underlineColorAndroid="transparent"
             onChangeText={(password) => this.setState({ password })}
           />
         </View>
 
         <TouchableHighlight
-          style={[styles.buttonContainer, styles.loginButton]}
-          onPress={() => this.ChangeScreen("Home")}
+          style={[styles.buttonContainer, styles.sendButton]}
+          onPress={() => this.onClickListener("login")}
         >
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableHighlight>
-
-        <TouchableHighlight
-          style={styles.buttonContainer}
-          onPress={() => this.onClickListener("restore_password")}
-        >
-          <Text>Forgot your password?</Text>
-        </TouchableHighlight>
-
-        <TouchableHighlight
-          style={styles.buttonContainer}
-          onPress={() => this.ChangeScreen("Signup")}
-        >
-          <Text>Register</Text>
+          <Text style={styles.buttonText}>Send</Text>
         </TouchableHighlight>
       </View>
     );
   }
 }
-LoginScreen.navigationOptions = {
+SignupScreen.navigationOptions = {
   headerShown: false,
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#DCDCDC",
+    backgroundColor: "#fff",
+  },
+  logo: {
+    width: 120,
+    height: 120,
+    justifyContent: "center",
+    marginBottom: 20,
   },
   inputContainer: {
     borderBottomColor: "#F5FCFF",
@@ -126,13 +133,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 20,
-    width: 250,
+    width: 100,
     borderRadius: 30,
   },
-  loginButton: {
-    backgroundColor: "#00b5ec",
+  sendButton: {
+    backgroundColor: "#FF4500",
   },
-  loginText: {
+  buttonText: {
     color: "white",
   },
 });

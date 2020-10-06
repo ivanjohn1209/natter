@@ -1,3 +1,4 @@
+import { Body, Header, Icon, Right, Button, Left } from "native-base";
 import React, { Component } from "react";
 import {
   StyleSheet,
@@ -9,8 +10,9 @@ import {
   ScrollView,
   TextInput,
   FlatList,
-  Button,
 } from "react-native";
+import { TouchableHighlight } from "react-native-gesture-handler";
+import config from "../config";
 
 export default class ChatScreen extends Component {
   constructor(props) {
@@ -72,9 +74,19 @@ export default class ChatScreen extends Component {
           message: "Lorem ipsum dolor sit a met",
         },
       ],
+      userChatData: [],
     };
   }
-
+  componentDidMount() {
+    const { navigation } = this.props;
+    navigation.addListener("willFocus", () => {
+      const { state } = this.props.navigation;
+      console.log(state.params.userChatData);
+      this.setState({
+        userChatData: state.params.userChatData,
+      });
+    });
+  }
   renderDate = (date) => {
     return <Text style={styles.time}>{date}</Text>;
   };
@@ -82,6 +94,28 @@ export default class ChatScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Header hasTabs style={{ backgroundColor: config.mainColor }}>
+          <Left>
+            <TouchableHighlight onPress={() => this.ChangeScreen("ChatList")}>
+              <Icon name="arrow-back" style={{ color: config.fontColor }} />
+            </TouchableHighlight>
+          </Left>
+          <Body style={styles.nameContainer}>
+            <Image
+              style={styles.logo}
+              source={{ uri: this.state.userChatData.image }}
+            />
+            <Text style={styles.name}>{this.state.userChatData.name}</Text>
+          </Body>
+          <Right>
+            <TouchableHighlight>
+              <Icon
+                name="information-circle-outline"
+                style={{ color: config.fontColor }}
+              />
+            </TouchableHighlight>
+          </Right>
+        </Header>
         <FlatList
           style={styles.list}
           data={this.state.data}
@@ -89,7 +123,6 @@ export default class ChatScreen extends Component {
             return item.id;
           }}
           renderItem={(message) => {
-            console.log(item);
             const item = message.item;
             let inMessage = item.type === "in";
             let itemStyle = inMessage ? styles.itemIn : styles.itemOut;
@@ -127,10 +160,15 @@ export default class ChatScreen extends Component {
     );
   }
 }
-
+ChatScreen.navigationOptions = {
+  headerShown: false,
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  nameContainer: {
+    flexDirection: "row",
   },
   list: {
     paddingHorizontal: 17,
@@ -154,6 +192,10 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     alignSelf: "center",
+  },
+  name: {
+    fontSize: 18,
+    marginTop: 10,
   },
   inputContainer: {
     borderBottomColor: "#F5FCFF",
@@ -196,5 +238,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#eeeeee",
     borderRadius: 300,
     padding: 5,
+  },
+  logo: {
+    width: 40,
+    height: 40,
+    borderRadius: 40 / 2,
+    overflow: "hidden",
+    borderWidth: 2,
+    borderColor: "#4300af",
   },
 });

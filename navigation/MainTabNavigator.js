@@ -1,6 +1,5 @@
 import { Platform } from "react-native";
 import { createStackNavigator } from "react-navigation-stack";
-import LoginScreen from "../screens/LoginScreen";
 import MyScreen from "../screens/MyScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import ChatListScreen from "../screens/ChatListScreen";
@@ -17,7 +16,6 @@ const config = Platform.select({
 
 const MainNavigator = createStackNavigator(
   {
-    Login: LoginScreen,
     Home: MyScreen,
     Friend: FriendScreen,
     Profile: ProfileScreen,

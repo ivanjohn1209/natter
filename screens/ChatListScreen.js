@@ -1,3 +1,4 @@
+import { Container } from "native-base";
 import React, { Component } from "react";
 import {
   StyleSheet,
@@ -9,119 +10,26 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
+import ChatList from "../components/ChatList";
 import ScreenFooter from "../components/ScreenFooter";
+import ScreenHeader from "../components/ScreenHeader";
 
 export default class ChatListScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      calls: [
-        {
-          id: 1,
-          name: "Mark Doe",
-          status: "active",
-          image: "https://bootdey.com/img/Content/avatar/avatar7.png",
-        },
-        {
-          id: 2,
-          name: "Clark Man",
-          status: "active",
-          image: "https://bootdey.com/img/Content/avatar/avatar6.png",
-        },
-        {
-          id: 3,
-          name: "Jaden Boor",
-          status: "active",
-          image: "https://bootdey.com/img/Content/avatar/avatar5.png",
-        },
-        {
-          id: 4,
-          name: "Srick Tree",
-          status: "active",
-          image: "https://bootdey.com/img/Content/avatar/avatar4.png",
-        },
-        {
-          id: 5,
-          name: "Erick Doe",
-          status: "active",
-          image: "https://bootdey.com/img/Content/avatar/avatar3.png",
-        },
-        {
-          id: 6,
-          name: "Francis Doe",
-          status: "active",
-          image: "https://bootdey.com/img/Content/avatar/avatar2.png",
-        },
-        {
-          id: 8,
-          name: "Matilde Doe",
-          status: "active",
-          image: "https://bootdey.com/img/Content/avatar/avatar1.png",
-        },
-        {
-          id: 9,
-          name: "John Doe",
-          status: "active",
-          image: "https://bootdey.com/img/Content/avatar/avatar4.png",
-        },
-        {
-          id: 10,
-          name: "Fermod Doe",
-          status: "active",
-          image: "https://bootdey.com/img/Content/avatar/avatar7.png",
-        },
-        {
-          id: 11,
-          name: "Danny Doe",
-          status: "active",
-          image: "https://bootdey.com/img/Content/avatar/avatar1.png",
-        },
-      ],
-    };
-  }
-
-  renderItem = ({ item }) => {
-    return (
-      <TouchableOpacity onPress={() => this.props.navigation.navigate("Chat")}>
-        <View style={styles.row}>
-          <Image source={{ uri: item.image }} style={styles.pic} />
-          <View>
-            <View style={styles.nameContainer}>
-              <Text
-                style={styles.nameTxt}
-                numberOfLines={1}
-                ellipsizeMode="tail"
-              >
-                {item.name}
-              </Text>
-              <Text style={styles.mblTxt}>Mobile</Text>
-            </View>
-            <View style={styles.msgContainer}>
-              <Text style={styles.msgTxt}>{item.status}</Text>
-            </View>
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
-  };
-
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <FlatList
-          extraData={this.state}
-          data={this.state.calls}
-          keyExtractor={(item) => {
-            return item.id;
-          }}
-          renderItem={this.renderItem}
-        />
-        <ScreenFooter navigation={this.props.navigation} />
-      </View>
+      <Container>
+        <ScreenHeader />
+        <View style={{ flex: 1 }}>
+          <ChatList navigation={this.props.navigation} />
+          <ScreenFooter navigation={this.props.navigation} />
+        </View>
+      </Container>
     );
   }
 }
-
+ChatListScreen.navigationOptions = {
+  headerShown: false,
+};
 const styles = StyleSheet.create({
   row: {
     flexDirection: "row",

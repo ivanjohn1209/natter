@@ -11,7 +11,9 @@ import {
   TextInput,
   FlatList,
 } from "react-native";
+import AddFriendList from "../components/AddFriendList";
 import ScreenFooter from "../components/ScreenFooter";
+import ScreenHeader from "../components/ScreenHeader";
 
 export default class FriendScreen extends Component {
   constructor(props) {
@@ -74,67 +76,54 @@ export default class FriendScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.formContent}>
+        <ScreenHeader />
+        <View style={styles.containerList}>
           <View style={styles.inputContainer}>
-            <Icon name="ios-search" style={[styles.icon, styles.inputIcon]} />
-            <TextInput
-              style={styles.inputs}
-              ref={"txtPassword"}
-              placeholder="Search"
-              underlineColorAndroid="transparent"
-              onChangeText={(name_address) => this.setState({ name_address })}
-            />
+            <Text style={styles.FriendsLabel}>Find Friends</Text>
+            <View style={styles.iconContainer}>
+              <Icon name="ios-search" style={[styles.icon, styles.inputIcon]} />
+            </View>
           </View>
+          <AddFriendList />
         </View>
-
-        <FlatList
-          style={styles.notificationList}
-          data={this.state.data}
-          keyExtractor={(item) => {
-            return item.id;
-          }}
-          renderItem={({ item }) => {
-            return (
-              <View style={styles.notificationBox}>
-                <Image style={styles.image} source={{ uri: item.icon }} />
-
-                <Text style={styles.name}>{item.description}</Text>
-              </View>
-            );
-          }}
-        />
         <ScreenFooter navigation={this.props.navigation} />
       </View>
     );
   }
 }
-
+FriendScreen.navigationOptions = {
+  headerShown: false,
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#EBEBEB",
+  },
+  containerList: {
+    flex: 1,
+    backgroundColor: "#E6E6E6",
   },
   formContent: {
     flexDirection: "row",
-    marginTop: 30,
   },
   inputContainer: {
-    borderBottomColor: "#F5FCFF",
     backgroundColor: "#FFFFFF",
-    borderRadius: 30,
-    borderBottomWidth: 1,
-    height: 45,
     flexDirection: "row",
     alignItems: "center",
-    flex: 1,
-    margin: 10,
+    padding: 10,
+  },
+  iconContainer: {
+    backgroundColor: "#EBEBEB",
+    borderRadius: 100,
+    padding: 5,
+    alignItems: "flex-end",
+  },
+  FriendsLabel: {
+    fontSize: 23,
+    fontWeight: "bold",
   },
   icon: {
     width: 30,
     height: 30,
-  },
-  iconBtnSearch: {
-    alignSelf: "center",
   },
   inputs: {
     height: 45,
@@ -143,8 +132,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   inputIcon: {
-    marginLeft: 15,
-    justifyContent: "center",
+    textAlign: "center",
   },
   notificationList: {
     marginTop: 20,

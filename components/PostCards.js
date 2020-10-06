@@ -22,7 +22,7 @@ export default class PostCards extends Component {
   render() {
     return (
       <Container style={styles.container}>
-        <Content>
+        <Content showsVerticalScrollIndicator={false}>
           {[...Array(50)].map((val, key) => {
             return (
               <Card transparent style={styles.card}>

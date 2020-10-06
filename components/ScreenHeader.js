@@ -16,13 +16,7 @@ export default class ScreenHeader extends Component {
     return (
       <Header hasTabs style={{ backgroundColor: config.mainColor }}>
         <Body>
-          <Image
-            style={styles.logo}
-            source={{
-              uri:
-                "https://res-2.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco/v1449137828/vgizlmjm9r9qre4r51lx.png",
-            }}
-          />
+          <Image style={styles.logo} source={require("../assets/logo.png")} />
         </Body>
         <Right>
           <Button transparent onPress={() => this.ChangeScreen("Search")}>
@@ -40,7 +34,6 @@ const styles = StyleSheet.create({
   logo: {
     height: 90,
     width: 90,
-    marginTop: 10,
-    // borderRadius: 100
+    resizeMode: "contain",
   },
 });
