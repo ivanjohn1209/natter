@@ -23,6 +23,12 @@ export default class LoginScreen extends Component {
     this.props.navigation.navigate(e);
   }
 
+  handleChange(e, name) {
+    this.setState({
+      [name]: e,
+    });
+  }
+
   onClickListener = (viewId) => {
     Alert.alert("Alert", "Button pressed " + viewId);
   };
@@ -30,16 +36,11 @@ export default class LoginScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Image source={require("../assets/logo.png")} style={styles.logo} />
         <View style={styles.inputContainer}>
-          <Image
-            style={styles.inputIcon}
-            source={{
-              uri: "https://png.icons8.com/message/ultraviolet/50/3498db",
-            }}
-          />
           <TextInput
             style={styles.inputs}
-            placeholder="Email"
+            placeholder="Phone or email"
             keyboardType="email-address"
             underlineColorAndroid="transparent"
             onChangeText={(email) => this.setState({ email })}
@@ -47,12 +48,6 @@ export default class LoginScreen extends Component {
         </View>
 
         <View style={styles.inputContainer}>
-          <Image
-            style={styles.inputIcon}
-            source={{
-              uri: "https://png.icons8.com/key-2/ultraviolet/50/3498db",
-            }}
-          />
           <TextInput
             style={styles.inputs}
             placeholder="Password"
@@ -68,20 +63,14 @@ export default class LoginScreen extends Component {
         >
           <Text style={styles.loginText}>Login</Text>
         </TouchableHighlight>
-
-        <TouchableHighlight
-          style={styles.buttonContainer}
-          onPress={() => this.onClickListener("restore_password")}
-        >
-          <Text>Forgot your password?</Text>
-        </TouchableHighlight>
-
-        <TouchableHighlight
-          style={styles.buttonContainer}
-          onPress={() => this.ChangeScreen("Signup")}
-        >
-          <Text>Register</Text>
-        </TouchableHighlight>
+        <View style={styles.buttonSignup}>
+          <TouchableHighlight
+            style={styles.buttonContainer}
+            onPress={() => this.ChangeScreen("Signup")}
+          >
+            <Text style={styles.buttonText}>CREATE NEW NATTER ACCOUNT</Text>
+          </TouchableHighlight>
+        </View>
       </View>
     );
   }
@@ -95,12 +84,25 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#DCDCDC",
+    backgroundColor: "#fff",
+  },
+  buttonText: {
+    color: "#4300af",
+    fontWeight: "bold",
+  },
+  logo: {
+    height: 90,
+    width: 90,
+    resizeMode: "contain",
+  },
+  buttonSignup: {
+    paddingTop: 650,
+    position: "absolute",
   },
   inputContainer: {
-    borderBottomColor: "#F5FCFF",
+    borderBottomColor: "#dddfe2",
     backgroundColor: "#FFFFFF",
-    borderRadius: 30,
+    borderRadius: 5,
     borderBottomWidth: 1,
     width: 250,
     height: 45,
@@ -110,7 +112,7 @@ const styles = StyleSheet.create({
   },
   inputs: {
     height: 45,
-    marginLeft: 16,
+    marginLeft: 10,
     borderBottomColor: "#FFFFFF",
     flex: 1,
   },
@@ -126,11 +128,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 20,
-    width: 250,
-    borderRadius: 30,
+    width: 300,
+    backgroundColor: "#4300af12",
+    borderRadius: 5,
   },
   loginButton: {
-    backgroundColor: "#00b5ec",
+    backgroundColor: "#4300af",
   },
   loginText: {
     color: "white",

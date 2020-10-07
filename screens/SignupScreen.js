@@ -18,72 +18,43 @@ export default class SignupScreen extends Component {
       email: "",
       password: "",
     };
+    this.ChangeScreen = this.ChangeScreen.bind(this);
   }
 
   onClickListener = (viewId) => {
     Alert.alert("Alert", "Button pressed " + viewId);
   };
-
+  ChangeScreen(e) {
+    this.props.navigation.navigate(e);
+  }
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.screenContainer}>
         <SignupHeader />
-        <Image
-          style={styles.logo}
-          source={{ uri: "https://png.icons8.com/google/color/120" }}
-        />
 
-        <View style={styles.inputContainer}>
+        <View style={styles.container}>
           <Image
-            style={styles.inputIcon}
+            style={styles.logo}
             source={{
-              uri: "https://png.icons8.com/user/ultraviolet/50/3498db",
+              uri: "https://eelspace.com/wp-content/uploads/2020/06/3.gif",
             }}
           />
-          <TextInput
-            style={styles.inputs}
-            placeholder="Name"
-            underlineColorAndroid="transparent"
-            onChangeText={(email) => this.setState({ email })}
-          />
-        </View>
+          <View style={styles.contentContainer}>
+            <Text style={styles.contentLabel}>Join Natter</Text>
+            <View style={styles.contenTextContainer}>
+              <Text style={styles.contentText}>
+                We'll help you create a new account in a few easy steps.
+              </Text>
+            </View>
+          </View>
 
-        <View style={styles.inputContainer}>
-          <Image
-            style={styles.inputIcon}
-            source={{
-              uri: "https://png.icons8.com/message/ultraviolet/50/3498db",
-            }}
-          />
-          <TextInput
-            style={styles.inputs}
-            placeholder="Email"
-            underlineColorAndroid="transparent"
-            onChangeText={(password) => this.setState({ password })}
-          />
+          <TouchableHighlight
+            style={[styles.buttonContainer, styles.NextButton]}
+            onPress={() => this.ChangeScreen("NameForm")}
+          >
+            <Text style={styles.buttonText}>Next</Text>
+          </TouchableHighlight>
         </View>
-
-        <View style={styles.inputContainer}>
-          <Image
-            style={styles.inputIcon}
-            source={{
-              uri: "https://png.icons8.com/speech-bubble/ultraviolet/50",
-            }}
-          />
-          <TextInput
-            style={[styles.messageInput]}
-            placeholder="Message"
-            underlineColorAndroid="transparent"
-            onChangeText={(password) => this.setState({ password })}
-          />
-        </View>
-
-        <TouchableHighlight
-          style={[styles.buttonContainer, styles.sendButton]}
-          onPress={() => this.onClickListener("login")}
-        >
-          <Text style={styles.buttonText}>Send</Text>
-        </TouchableHighlight>
       </View>
     );
   }
@@ -93,26 +64,36 @@ SignupScreen.navigationOptions = {
 };
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    marginTop: 50,
+  },
+  screenContainer: {
     backgroundColor: "#fff",
+    height: "100%",
+    width: "100%",
   },
   logo: {
-    width: 120,
-    height: 120,
+    width: 200,
+    height: 200,
     justifyContent: "center",
     marginBottom: 20,
+    resizeMode: "contain",
   },
-  inputContainer: {
-    borderBottomColor: "#F5FCFF",
-    backgroundColor: "#FFFFFF",
-    borderRadius: 30,
-    borderBottomWidth: 1,
-    width: 250,
-    height: 45,
-    marginBottom: 20,
-    flexDirection: "row",
+  contentLabel: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  contentText: {
+    fontSize: 14,
+    textAlign: "center",
+    color: "#606770",
+  },
+  contenTextContainer: {
+    paddingHorizontal: 20,
+    marginTop: 20,
+  },
+  contentContainer: {
     alignItems: "center",
   },
   inputs: {
@@ -133,11 +114,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 20,
-    width: 100,
-    borderRadius: 30,
+    width: "80%",
+    marginTop: 50,
+    borderRadius: 5,
   },
-  sendButton: {
-    backgroundColor: "#FF4500",
+  NextButton: {
+    backgroundColor: "#4300af",
   },
   buttonText: {
     color: "white",
