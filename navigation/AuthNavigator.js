@@ -7,7 +7,10 @@ import { createStackNavigator } from "react-navigation-stack";
 
 import LoginScreen from "../screens/LoginScreen";
 import SignupScreen from "../screens/SignupScreen";
-// import WelcomeScreen from "../screens/WelcomeScreen";
+import NameFormScreen from "../screens/SignupForm/NameFormScreen";
+import BirthdayFormScreen from "../screens/SignupForm/BirthdayFormScreen";
+import GenderFormScreen from "../screens/SignupForm/GenderFormScreen";
+import MobileNumberFormScreen from "../screens/SignupForm/MobileNumberFormScreen";
 
 const config = Platform.select({
   web: { headerMode: "screen" },
@@ -16,9 +19,12 @@ const config = Platform.select({
 
 const AuthStack = createStackNavigator(
   {
-    // Welcome: WelcomeScreen,
     Login: LoginScreen,
     Signup: SignupScreen,
+    NameForm: NameFormScreen,
+    BirthdayForm: BirthdayFormScreen,
+    GenderForm: GenderFormScreen,
+    MobileNumberForm: MobileNumberFormScreen,
   },
   config
 );

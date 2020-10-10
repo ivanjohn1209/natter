@@ -1,5 +1,5 @@
 let config = {
-  // api: "https://4cravery.com/app/",
+  api: "http://natter.epizy.com/app/",
 
   //
   themeColor: "#4300af",

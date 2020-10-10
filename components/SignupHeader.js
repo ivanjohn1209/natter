@@ -11,6 +11,7 @@ import {
 } from "native-base";
 import config from "../config";
 import { Image, StyleSheet } from "react-native";
+import { TouchableHighlight } from "react-native-gesture-handler";
 
 export default class SignupHeader extends Component {
   constructor(props) {
@@ -23,21 +24,31 @@ export default class SignupHeader extends Component {
   }
   render() {
     return (
-      <Header hasTabs style={{ backgroundColor: config.mainColor }}>
-        <Left>
-          <Text>back</Text>
-        </Left>
-        <Body>
-          <Text>test</Text>
+      <Header
+        hasTabs
+        style={{
+          backgroundColor: config.mainColor,
+          borderBottomColor: "#dddfe2",
+          borderBottomWidth: 1,
+        }}
+      >
+        <Body style={styles.HeaderBody}>
+          <TouchableHighlight>
+            <Icon name="arrow-back" />
+          </TouchableHighlight>
+          <Text style={styles.HeaderTittle}>Create Account</Text>
         </Body>
       </Header>
     );
   }
 }
 const styles = StyleSheet.create({
-  logo: {
-    height: 90,
-    width: 90,
-    resizeMode: "contain",
+  HeaderBody: {
+    flexDirection: "row",
+    paddingLeft: 10,
+  },
+  HeaderTittle: {
+    fontSize: 20,
+    marginLeft: 15,
   },
 });
