@@ -23,10 +23,6 @@ import { CreateNewUserContext } from "../../context/CreateUserContext";
 export default class GenderFormScreen extends Component {
   constructor(props) {
     super(props);
-    state = {
-      email: "",
-      password: "",
-    };
     this.ChangeScreen = this.ChangeScreen.bind(this);
   }
   ChangeScreen(e) {

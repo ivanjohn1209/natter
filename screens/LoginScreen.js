@@ -8,19 +8,32 @@ import {
   TouchableHighlight,
   Image,
   Alert,
+  ActivityIndicator,
+  AsyncStorage,
 } from "react-native";
-
+import { userLogin } from "../functions/natterFetch";
 export default class LoginScreen extends Component {
   constructor(props) {
     super(props);
-    state = {
+    this.state = {
       email: "",
       password: "",
+      isLoading: false,
     };
     this.ChangeScreen = this.ChangeScreen.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
   }
   ChangeScreen(e) {
     this.props.navigation.navigate(e);
+  }
+  async saveData(data) {
+    try {
+      await AsyncStorage.setItem("userData", JSON.stringify(data));
+      this.props.navigation.navigate("Home");
+    } catch (e) {
+      alert("Failed to save the data to the storage");
+      console.log(e);
+    }
   }
 
   handleChange(e, name) {
@@ -28,7 +41,22 @@ export default class LoginScreen extends Component {
       [name]: e,
     });
   }
-
+  handleLogin(e) {
+    this.setState({ isLoading: true });
+    userLogin(this.state.email, this.state.password)
+      .then((result) => {
+        this.setState({ isLoading: false });
+        if (result.error) {
+          console.log(result);
+          alert("Wrong pass!");
+        } else if (result.error === undefined) {
+          this.saveData(result);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   onClickListener = (viewId) => {
     Alert.alert("Alert", "Button pressed " + viewId);
   };
@@ -59,9 +87,13 @@ export default class LoginScreen extends Component {
 
         <TouchableHighlight
           style={[styles.buttonContainer, styles.loginButton]}
-          onPress={() => this.ChangeScreen("Home")}
+          onPress={() => this.handleLogin()}
         >
-          <Text style={styles.loginText}>Login</Text>
+          {this.state.isLoading == true ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <Text style={styles.loginText}>Login</Text>
+          )}
         </TouchableHighlight>
         <View style={styles.buttonSignup}>
           <TouchableHighlight

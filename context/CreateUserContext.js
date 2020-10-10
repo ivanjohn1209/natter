@@ -6,6 +6,7 @@ export default class CreateUserContext extends React.Component {
     last_name: "",
     password: "",
     mobile_number: "",
+    email: "",
     date: "",
     gender: "",
   };
@@ -31,6 +32,9 @@ export default class CreateUserContext extends React.Component {
   setmobile_number = (mobile_number) => {
     this.setState({ mobile_number });
   };
+  setemail = (email) => {
+    this.setState({ email });
+  };
   render() {
     return (
       <CreateNewUserContext.Provider
@@ -42,6 +46,7 @@ export default class CreateUserContext extends React.Component {
           password: this.state.password,
           gender: this.state.gender,
           mobile_number: this.state.mobile_number,
+          email: this.state.email,
 
           //function
           setfirst_name: this.setfirst_name,
@@ -50,6 +55,7 @@ export default class CreateUserContext extends React.Component {
           setpassword: this.setpassword,
           setgender: this.setgender,
           setmobile_number: this.setmobile_number,
+          setemail: this.setemail,
         }}
       >
         {this.props.children}

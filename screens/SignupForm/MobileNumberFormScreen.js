@@ -27,6 +27,7 @@ export default class MobileNumberFormScreen extends Component {
     var user_password = newuser.password;
     var user_gender = newuser.gender;
     var user_mobile_number = newuser.mobile_number;
+    var user_email = newuser.email;
     var user_birthday = newuser.date;
     CreateNewUser(
       user_firstname,
@@ -34,6 +35,7 @@ export default class MobileNumberFormScreen extends Component {
       user_password,
       user_gender,
       user_mobile_number,
+      user_email,
       user_birthday
     )
       .then((result) => {
@@ -65,6 +67,16 @@ export default class MobileNumberFormScreen extends Component {
                     keyboardType="numeric"
                     underlineColorAndroid="transparent"
                     onChangeText={(e) => newUser.setmobile_number(e)}
+                  />
+                </View>
+                <View style={styles.inputContainer}>
+                  <TextInput
+                    defaultValue={newUser.email}
+                    style={styles.inputs}
+                    placeholder="Email"
+                    keyboardType="email-address"
+                    underlineColorAndroid="transparent"
+                    onChangeText={(e) => newUser.setemail(e)}
                   />
                 </View>
                 <View style={styles.inputContainer}>
