@@ -2,46 +2,54 @@ import React, { Component } from "react";
 const CreateNewUserContext = React.createContext();
 export default class CreateUserContext extends React.Component {
   state = {
-    Firstname: "",
-    LastName: "",
-    Password: "",
-    Gender: "",
-
-    Date: new Date(),
+    first_name: "",
+    last_name: "",
+    password: "",
+    mobile_number: "",
+    date: "",
+    gender: "",
   };
 
-  setFirstName = (Firstname) => {
-    this.setState({ Firstname });
+  setfirst_name = (first_name) => {
+    this.setState({ first_name });
   };
-  setLastName = (LastName) => {
-    this.setState({ LastName });
+  setlast_name = (last_name) => {
+    this.setState({ last_name });
   };
-  setDate = (Date) => {
-    this.setState({ Date });
+  setdate = (date) => {
+    this.setState({ date });
   };
-  setPassword = (Password) => {
-    this.setState({ Password });
+  setgender = (gender) => {
+    this.setState({ gender });
   };
-  setGender = (Gender) => {
-    this.setState({ Gender });
+  setpassword = (password) => {
+    this.setState({ password });
+  };
+  setpassword = (password) => {
+    this.setState({ password });
+  };
+  setmobile_number = (mobile_number) => {
+    this.setState({ mobile_number });
   };
   render() {
     return (
       <CreateNewUserContext.Provider
         value={{
           //state
-          Firstname: this.state.Firstname,
-          LastName: this.state.LastName,
-          Date: this.state.Date,
-          Password: this.state.Password,
-          Gender: this.state.Gender,
+          first_name: this.state.first_name,
+          last_name: this.state.last_name,
+          date: this.state.date,
+          password: this.state.password,
+          gender: this.state.gender,
+          mobile_number: this.state.mobile_number,
 
           //function
-          setFirstName: this.setFirstName,
-          setLastName: this.setLastName,
-          setDate: this.setDate,
-          setPassword: this.setPassword,
-          setGender: this.setGender,
+          setfirst_name: this.setfirst_name,
+          setlast_name: this.setlast_name,
+          setdate: this.setdate,
+          setpassword: this.setpassword,
+          setgender: this.setgender,
+          setmobile_number: this.setmobile_number,
         }}
       >
         {this.props.children}

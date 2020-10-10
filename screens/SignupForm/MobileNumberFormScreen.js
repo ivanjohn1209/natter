@@ -1,11 +1,3 @@
-// import { View } from "native-base";
-// import React, { Component } from "react";
-
-// export default class GenderFormScreen extends Component {
-//   render() {
-//     return <View></View>;
-//   }
-// }
 import React, { Component } from "react";
 import {
   StyleSheet,
@@ -16,11 +8,11 @@ import {
   TouchableHighlight,
   Image,
   Alert,
-  Picker,
 } from "react-native";
 import SignupHeader from "../../components/SignupHeader";
 import { CreateNewUserContext } from "../../context/CreateUserContext";
-export default class GenderFormScreen extends Component {
+import { CreateNewUser } from "../../functions/natterFetch";
+export default class MobileNumberFormScreen extends Component {
   constructor(props) {
     super(props);
     state = {
@@ -29,8 +21,27 @@ export default class GenderFormScreen extends Component {
     };
     this.ChangeScreen = this.ChangeScreen.bind(this);
   }
-  ChangeScreen(e) {
-    this.props.navigation.navigate(e);
+  ChangeScreen(e, newuser) {
+    var user_firstname = newuser.first_name;
+    var user_lastname = newuser.last_name;
+    var user_password = newuser.password;
+    var user_gender = newuser.gender;
+    var user_mobile_number = newuser.mobile_number;
+    var user_birthday = newuser.date;
+    CreateNewUser(
+      user_firstname,
+      user_lastname,
+      user_password,
+      user_gender,
+      user_mobile_number,
+      user_birthday
+    )
+      .then((result) => {
+        this.props.navigation.navigate(e);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   onClickListener = (viewId) => {
@@ -44,33 +55,35 @@ export default class GenderFormScreen extends Component {
           <View style={styles.container}>
             <SignupHeader />
             <View style={styles.formContainer}>
-              <Text style={styles.nameTittle}>What's your gender?</Text>
-              <View style={styles.contenTextContainer}>
-                <Text style={styles.contentText}>
-                  We'll help you create a new account in a few easy steps.
-                </Text>
-              </View>
+              <Text style={styles.nameTittle}>Enter Your Mobile Number</Text>
               <View style={styles.formInputContainer}>
                 <View style={styles.inputContainer}>
-                  <Picker
-                    selectedValue={newUser.gender}
-                    style={{ height: 50, width: "100%" }}
-                    onValueChange={(itemValue, itemIndex) =>
-                      newUser.setgender(itemValue)
-                    }
-                  >
-                    <Picker.Item label="Male" value="Male" />
-                    <Picker.Item label="Female" value="Female" />
-                    <Picker.Item label="Others" value="Others" />
-                  </Picker>
+                  <TextInput
+                    defaultValue={newUser.mobile_number}
+                    style={styles.inputs}
+                    placeholder="Mobile number"
+                    keyboardType="numeric"
+                    underlineColorAndroid="transparent"
+                    onChangeText={(e) => newUser.setmobile_number(e)}
+                  />
+                </View>
+                <View style={styles.inputContainer}>
+                  <TextInput
+                    defaultValue={newUser.password}
+                    style={styles.inputs}
+                    placeholder="Password"
+                    secureTextEntry={true}
+                    underlineColorAndroid="transparent"
+                    onChangeText={(e) => newUser.setpassword(e)}
+                  />
                 </View>
               </View>
 
               <TouchableHighlight
                 style={[styles.buttonContainer, styles.loginButton]}
-                onPress={() => this.ChangeScreen("MobileNumberForm")}
+                onPress={() => this.ChangeScreen("Home", newUser)}
               >
-                <Text style={styles.loginText}>Next</Text>
+                <Text style={styles.loginText}>Finish</Text>
               </TouchableHighlight>
             </View>
           </View>
@@ -79,7 +92,7 @@ export default class GenderFormScreen extends Component {
     );
   }
 }
-GenderFormScreen.navigationOptions = {
+MobileNumberFormScreen.navigationOptions = {
   headerShown: false,
 };
 const styles = StyleSheet.create({
@@ -87,15 +100,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     height: "100%",
     width: "100%",
-  },
-  contenTextContainer: {
-    paddingHorizontal: 20,
-    marginTop: 15,
-  },
-  contentText: {
-    fontSize: 14,
-    textAlign: "center",
-    color: "#606770",
   },
   inputContainer: {
     borderBottomColor: "#dddfe2",

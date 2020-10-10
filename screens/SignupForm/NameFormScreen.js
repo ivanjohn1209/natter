@@ -39,22 +39,22 @@ export default class NameFormScreen extends Component {
               <View style={styles.formInputContainer}>
                 <View style={styles.inputContainer}>
                   <TextInput
-                    defaultValue={newUser.FirstName}
+                    defaultValue={newUser.first_name}
                     style={styles.inputs}
                     placeholder="First Name"
                     keyboardType="email-address"
                     underlineColorAndroid="transparent"
-                    onChangeText={(e) => newUser.setFirstName(e)}
+                    onChangeText={(e) => newUser.setfirst_name(e)}
                   />
                 </View>
 
                 <View style={styles.inputContainer}>
                   <TextInput
-                    defaultValue={newUser.LastName}
+                    defaultValue={newUser.last_name}
                     style={styles.inputs}
                     placeholder="Last Name"
                     underlineColorAndroid="transparent"
-                    onChangeText={(e) => newUser.setLastName(e)}
+                    onChangeText={(e) => newUser.setlast_name(e)}
                   />
                 </View>
               </View>

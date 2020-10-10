@@ -38,15 +38,7 @@ export default class BirthdayFormScreen extends Component {
               <View style={styles.formInputContainer}>
                 <View style={styles.inputContainer}>
                   {/* <DatePicker
-                    date={newUser.Date}
-                    minimumDate={new Date(Date.now() + 3600 * 1000 * 24)}
-                    defaultDate={newUser.Date}
-                    // androidMode="spinner"
-                    placeholder="select date"
-                    onDateChange={(e) => newUser.setDate(e)}
-                  /> */}
-                  <DatePicker
-                    defaultDate={newUser.Date}
+                    defaultDate={newUser.date}
                     minimumDate={new Date(1950, 1, 1)}
                     maximumDate={new Date()}
                     locale={"en"}
@@ -57,9 +49,9 @@ export default class BirthdayFormScreen extends Component {
                     placeHolderText="Select date"
                     format="YYYY-MM-DD"
                     placeHolderTextStyle={{ color: "#d3d3d3" }}
-                    onDateChange={(e) => newUser.setDate(e)}
+                    onDateChange={(e) => newUser.setdate(e)}
                     disabled={false}
-                  />
+                  /> */}
                 </View>
               </View>
 

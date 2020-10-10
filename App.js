@@ -1,10 +1,10 @@
 import React from "react";
 import { AppLoading } from "expo";
-import { Container, Text } from "native-base";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 import AppNavigator from "./navigation/AppNavigator";
 import { CreateUserContext } from "./context/CreateUserContext";
+import { StatusBar } from "react-native";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -30,6 +30,7 @@ export default class App extends React.Component {
 
     return (
       <CreateUserContext>
+        <StatusBar barStyle="dark-content" backgroundColor="#fff" />
         <AppNavigator />
       </CreateUserContext>
     );

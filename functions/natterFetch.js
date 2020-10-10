@@ -2,44 +2,29 @@ export {
   //user related query
   CreateNewUser,
 };
-let natter_api = "http://natter.epizy.com/app/";
+const natter_api = "http://natter.heliohost.org/app/";
 
-// function CreateNewUser(e) {
-//   var formdata = new FormData();
-//   formdata.append("user_firstname", "asdasd");
-//   formdata.append("user_lastname", "asdasd");
-//   formdata.append("user_birthday", "asdsadsa");
-//   formdata.append("user_password", "afs");
-//   var requestOptions = {
-//     method: "POST",
-//     body: formdata,
-//     redirect: "follow",
-//   };
-//   return fetch(
-//     "http://natter.epizy.com/app/users/createNewUser",
-//     requestOptions
-// )
-//     .then((response) => response.text())
-//     .then((result) => {
-//       return result;
-//     })
-//     .catch((error) => {
-//       return error;
-//     });
-// }
-function CreateNewUser() {
+function CreateNewUser(
+  user_firstname,
+  user_lastname,
+  user_password,
+  user_gender,
+  user_mobile_number,
+  user_birthday
+) {
   var formdata = new FormData();
-  formdata.append("user_firstname", "user_id");
-  formdata.append("user_lastname", "name");
-  formdata.append("user_birthday", "alue");
-  formdata.append("user_password", "description");
+  formdata.append("user_firstname", user_firstname);
+  formdata.append("user_lastname", user_lastname);
+  formdata.append("user_password", user_password);
+  formdata.append("user_gender", user_gender);
+  formdata.append("user_mobile_number", user_mobile_number);
+  formdata.append("user_birthday", user_birthday);
   var requestOptions = {
     method: "POST",
     body: formdata,
     redirect: "follow",
   };
-
-  return fetch(natter_api + "users/createNewUser", requestOptions)
+  return fetch(natter_api + "users/createUsers", requestOptions)
     .then((response) => response.text())
     .then((result) => {
       return result;
