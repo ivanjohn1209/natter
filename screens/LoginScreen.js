@@ -42,20 +42,21 @@ export default class LoginScreen extends Component {
     });
   }
   handleLogin(e) {
-    this.setState({ isLoading: true });
-    userLogin(this.state.email, this.state.password)
-      .then((result) => {
-        this.setState({ isLoading: false });
-        if (result.error) {
-          console.log(result);
-          alert("Wrong pass!");
-        } else if (result.error === undefined) {
-          this.saveData(result);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // this.setState({ isLoading: true });
+    // userLogin(this.state.email, this.state.password)
+    //   .then((result) => {
+    //     this.setState({ isLoading: false });
+    //     if (result.error) {
+    //       console.log(result);
+    //       alert("Wrong pass!");
+    //     } else if (result.error === undefined) {
+    //       this.saveData(result);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    this.props.navigation.navigate("Home");
   }
   onClickListener = (viewId) => {
     Alert.alert("Alert", "Button pressed " + viewId);

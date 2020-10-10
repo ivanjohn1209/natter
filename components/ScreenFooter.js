@@ -72,11 +72,11 @@ export default class ScreenFooter extends Component {
               />
             </Button>
 
-            <Button vertical onPress={() => this.ChangeScreen("Menu")}>
+            <Button vertical onPress={() => this.ChangeScreen("Profile")}>
               <Icon
-                name="menu"
+                name="person"
                 style={{
-                  color: routeName === "Menu" ? "#4300af" : config.fontColor,
+                  color: routeName === "Profile" ? "#4300af" : config.fontColor,
                 }}
               />
             </Button>
